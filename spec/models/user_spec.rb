@@ -7,9 +7,9 @@ describe User do
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいかないとき' do
       it "nicknameが空では登録できない" do
-        @user.email = nil
+        @user.nickname = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email can't be blank")
+        expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
       it "emailが空では登録できない" do
         @user.email = nil
@@ -34,14 +34,26 @@ describe User do
         expect(@user.errors.full_messages).to include("Password can't be blank")      
       end
       it "passwordが5文字以下であれば登録できない" do
-        @user.password = "aaaaa"
-        @user.password_confirmation = "aaaaa"
+        @user.password = "abc12"
+        @user.password_confirmation = "abc12"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
       it "passwordが半角英字だけであれば登録できない" do
         @user.password = "aaaaaa"
         @user.password_confirmation = "aaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+      end
+      it "passwordが半角数字だけであれば登録できない" do
+        @user.password = "111111"
+        @user.password_confirmation = "111111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+      end
+      it "passwordが全角英数字だけであれば登録できない" do
+        @user.password = "ａｂｃ１２"
+        @user.password_confirmation = "ａｂｃ１２"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
       end

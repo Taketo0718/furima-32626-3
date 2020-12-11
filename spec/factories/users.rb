@@ -11,7 +11,7 @@ FactoryBot.define do
 
     nickname {Faker::Name.name}    
     email {Faker::Internet.free_email}
-    password {Faker::Internet.password(min_length: 6)}
+    password {Faker::Internet.password(min_length:4) + "1a"}
     birth_date {Faker::Date.between_except(from: '1930-01-01', to: '2016-01-01', excepted: '2016-01-01')}
   end
 end
