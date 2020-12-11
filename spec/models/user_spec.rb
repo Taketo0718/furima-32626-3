@@ -34,8 +34,8 @@ describe User do
         expect(@user.errors.full_messages).to include("Password can't be blank")      
       end
       it "passwordが5文字以下であれば登録できない" do
-        @user.password = "ab123"
-        @user.password_confirmation = "ab123"
+        @user.password = "aaaaa"
+        @user.password_confirmation = "aaaaa"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
@@ -61,12 +61,12 @@ describe User do
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
       it "last_nameが半角英数字だと登録できない" do
-        @user.last_name = "aaaaaa"
+        @user.last_name = "ｱｲｳｴｵ"
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name Full-width characters")
       end
       it "first_nameが半角英数字だと登録できない" do
-        @user.first_name = "aaaaaa"
+        @user.first_name = "ｱｲｳｴｵ"
         @user.valid?
         expect(@user.errors.full_messages).to include("First name Full-width characters")
       end
@@ -81,12 +81,12 @@ describe User do
         expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
       it "last_name_kanaが、ひらがな、漢字、英数字だと登録できない" do
-        @user.last_name_kana = "あ阿a1"
+        @user.last_name_kana = "あいうえお"
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name kana Full-width katakana characters")
       end
       it "first_name_kanaが、ひらがな、漢字、英数字だと登録できない" do
-        @user.first_name_kana = "あ阿a1"
+        @user.first_name_kana = "あいうえお"
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
       end
