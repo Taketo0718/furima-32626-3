@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   with_options presence: true do
+    validates :image
     validates :item_name
     validates :item_info
     validates :item_category
@@ -10,4 +11,5 @@ class Item < ApplicationRecord
     validates :item_price
   end
   belongs_to :user
+  has_one_attached :image
 end
