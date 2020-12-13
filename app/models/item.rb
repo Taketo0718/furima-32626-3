@@ -10,7 +10,6 @@ class Item < ApplicationRecord
     validates :image
     validates :item_name
     validates :item_info
-    validates :item_price
   end
 
   with_options numericality: { other_than: 1 }  do
@@ -20,6 +19,13 @@ class Item < ApplicationRecord
     validates :item_prefecture_id
     validates :item_scheduled_delivery_id
   end
+
+  validates :item_price, presence: true,
+    numericality:{ greater_than_or_equal_to: 300,
+                  less_than_or_equal_to: 9999999,
+                  message: 'Out of setting range' },
+    numericality:{only_integer: true,
+                  message: "Half-width number"}
 
   belongs_to :user
   has_one_attached :image
