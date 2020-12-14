@@ -5,7 +5,6 @@ function calc (){
 
 
   item_price.addEventListener("keyup", function() {
-    console.log("yes!")
     value = item_price.value
     value2 = Math.floor(value * 0.1)
     add_tax_price.innerHTML = value2
