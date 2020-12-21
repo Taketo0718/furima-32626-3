@@ -16,26 +16,26 @@
 ### Association
 
 - has_many :items
-- has_many :sales
+- has_many :orders
 
 ## items テーブル
 
-| Column                 | Type       | Options                        |
-| ---------------------- | ---------- | ------------------------------ |
-| name                   | string     | null: false                    |
-| description            | text       | null: false                    |
-| category_id            | integer    | null: false                    |
-| condition_id           | integer    | null: false                    |
-| fee_payer_id           | integer    | null: false                    |
-| deliver_from_id        | integer    | null: false                    |
-| days_until_delivery_id | integer    | null: false                    |
-| price                  | integer    | null: false                    |
-| user                   | references | null: false, foreign_key: true |
+| Column                      | Type       | Options                        |
+| --------------------------- | ---------- | ------------------------------ |
+| item_name                   | string     | null: false                    |
+| item_info                   | text       | null: false                    |
+| item_category_id            | integer    | null: false                    |
+| item_sales_status_id        | integer    | null: false                    |
+| item_shipping_fee_status_id | integer    | null: false                    |
+| item_prefecture_id          | integer    | null: false                    |
+| item_scheduled_delivery_id  | integer    | null: false                    |
+| item_price                  | integer    | null: false                    |
+| user                        | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :sale
+- has_one :order
 
 ## sales テーブル
 
@@ -54,14 +54,14 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| sale          | references | null: false, foreign_key: true |
-| postcode      | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
+| postal_code   | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
-| address       | string     | null: false                    |
+| addresses     | string     | null: false                    |
 | building      | string     |                                |
-| phone         | string     | null: false                    |
+| phone_number  | string     | null: false                    |
 
 ### Association
 
-- belongs_to :sale
+- belongs_to :order
