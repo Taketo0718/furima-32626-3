@@ -10,6 +10,10 @@ describe ItemOrder do
       it "郵便番号と都道府県、市区町村、番地、ビル名、電話番号、item_id、user_id、tokenが存在すれば購入できる" do
         expect(@item_order).to be_valid
       end
+      it "建物が空でも購入できる" do
+        @item_order.building = nil
+        expect(@item_order).to be_valid
+      end
     end
 
     context '購入がうまくいかないとき' do
@@ -52,6 +56,11 @@ describe ItemOrder do
         @item_order.phone_number= "#{@item_order.phone_number}a"
         @item_order.valid?
         expect(@item_order.errors.full_messages).to include("Phone number Input only number")
+      end
+      it "電話番号が12桁以上だとを購入できない" do
+        @item_order.phone_number= "012345678901"
+        @item_order.valid?
+        expect(@item_order.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
     end
   end
